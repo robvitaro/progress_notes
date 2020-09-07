@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_185559) do
+ActiveRecord::Schema.define(version: 2020_09_07_202106) do
+
+  create_table "goals", force: :cascade do |t|
+    t.string "length", null: false
+    t.integer "number"
+    t.string "description", null: false
+    t.date "date"
+    t.integer "patient_id", null: false
+    t.integer "progress_note_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["patient_id"], name: "index_goals_on_patient_id"
+    t.index ["progress_note_id"], name: "index_goals_on_progress_note_id"
+  end
 
   create_table "patients", force: :cascade do |t|
     t.string "name"
@@ -45,6 +58,8 @@ ActiveRecord::Schema.define(version: 2020_09_07_185559) do
     t.index ["progress_note_id"], name: "index_word_errors_on_progress_note_id"
   end
 
+  add_foreign_key "goals", "patients"
+  add_foreign_key "goals", "progress_notes"
   add_foreign_key "progress_notes", "patients"
   add_foreign_key "scores", "patients"
   add_foreign_key "scores", "progress_notes"

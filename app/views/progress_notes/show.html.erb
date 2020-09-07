@@ -16,6 +16,13 @@
     <% end %>
   </ul>
 
+  <h3>Goals:</h3>
+  <ul>
+    <% @progress_note.goals.each do |goal| %>
+      <li><strong><%= goal.length.humanize %>-term <%= goal.number %>:</strong> <%= goal.description %></li>
+    <% end %>
+  </ul>
+
   <h3>Errors:</h3>
   <ul>
     <% @progress_note.word_errors.each do |error| %>

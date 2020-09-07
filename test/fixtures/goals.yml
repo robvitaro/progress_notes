@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  length: long
+  number: 1
+  description: MyString
+  date: 2020-09-07
+  patient: one
+  progress_note: one
+
+two:
+  length: short
+  number: 1
+  description: MyString
+  date: 2020-09-07
+  patient: two
+  progress_note: two

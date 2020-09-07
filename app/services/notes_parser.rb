@@ -1,5 +1,5 @@
 class NotesParser
-  attr_reader :notes, :errors, :scores
+  attr_reader :notes, :errors, :scores, :goals
 
   def initialize(progress_note)
     @notes = progress_note.notes
@@ -8,6 +8,7 @@ class NotesParser
   def call
     scanner = StringScanner.new(notes)
     @scores = find_scores(scanner)
+    @goals = find_goals(scanner)
     @errors = find_errors(scanner)
   end
 
@@ -37,6 +38,24 @@ class NotesParser
     wrong = string.scan(/-/).length
     right = string.scan(/\+/).length
     right.to_f / (right.to_f + wrong.to_f)
+  end
+
+  def find_goals(scanner)
+    scanner.reset
+    goals = []
+
+    if scanner.exist?(/LTG|STG/)
+      until scanner.eos?
+        goal = scanner.scan_until(/LTG\d|STG\d/)
+        break unless goal
+        length = goal[0].upcase == 'S' ? 'short' : (goal[0].upcase == 'L' ? 'long' : 'unknown')
+        number = goal.rpartition(/\d/)[1].to_i
+        description = scanner.scan_until(/$/)
+        goals << {length: length, description: description, number: number}
+      end
+    end
+
+    goals
   end
 
   def find_errors(scanner)
