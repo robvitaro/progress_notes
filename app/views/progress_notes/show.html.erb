@@ -1,14 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Notes:</strong>
-  <%= @progress_note.notes %>
-</p>
+<h1>Progress Notes for <%= @progress_note.patient.name %>, <%= @progress_note.created_at %></h1>
 
-<p>
-  <strong>Patient:</strong>
-  <%= @progress_note.patient_id %>
-</p>
+<div>
+  <p><strong>Notes:</strong></p>
+  <p><%= simple_format(sanitize @progress_note.notes) %></p>
+</div>
+
+<div>
+  <h2>Extrapolated Data</h2>
+  <h3>Scores:</h3>
+  <ul>
+    <% @progress_note.scores.each do |score| %>
+      <li><strong><%= score.assessment %>:</strong> <%= score.score * 100 %>%</li>
+    <% end %>
+  </ul>
+
+  <h3>Errors:</h3>
+  <ul>
+    <% @progress_note.word_errors.each do |error| %>
+      <li><%= error.word %></li>
+    <% end %>
+  </ul>
+</div>
 
 <%= link_to 'Edit', edit_progress_note_path(@progress_note) %> |
 <%= link_to 'Back', progress_notes_path %>
