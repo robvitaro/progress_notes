@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @progress_note.notes %>
+</p>
+
+<p>
+  <strong>Patient:</strong>
+  <%= @progress_note.patient_id %>
+</p>
+
+<%= link_to 'Edit', edit_progress_note_path(@progress_note) %> |
+<%= link_to 'Back', progress_notes_path %>

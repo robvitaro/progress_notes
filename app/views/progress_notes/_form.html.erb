@@ -1,0 +1,27 @@
+<%= form_with(model: progress_note, local: true) do |form| %>
+  <% if progress_note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(progress_note.errors.count, "error") %> prohibited this progress_note from being saved:</h2>
+
+      <ul>
+        <% progress_note.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_field :notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :patient_id %>
+    <%= form.text_field :patient_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
