@@ -12,13 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_field :notes %>
+    <%= form.label :patient %>
+    <%= form.collection_select(:patient_id, Patient.all, :id, :name, prompt: true) %>
   </div>
 
   <div class="field">
-    <%= form.label :patient_id %>
-    <%= form.text_field :patient_id %>
+    <%= form.label :notes %>
+    <%= form.text_area :notes, cols: 100, rows: 20 %>
   </div>
 
   <div class="actions">
