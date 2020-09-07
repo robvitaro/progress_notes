@@ -17,10 +17,11 @@ class NotesParser
     scanner.reset
     scores = {}
 
-    if scanner.exist?(/\+|-/)
+    if scanner.exist?(/ \+| -/)
       until scanner.eos?
-        word = scanner.scan_until(/\+|-/)
-        word = word&.chop&.chop&.gsub("\n","") # Ewwww!!
+        word = scanner.scan_until(/ \+| -/)
+        break unless word
+        word = word.rpartition(/ \+| -/).first.gsub(/.*\n/,"") # Ewwww!!
         scanner.pos = scanner.pos - 1
         score_string = scanner.scan_until(/$/)
         scores[word] = get_score(score_string)
@@ -44,8 +45,8 @@ class NotesParser
 
     if scanner.exist?(/errors: /)
       until scanner.eos?
-        scanner.scan_until(/errors: /)
-        scanner.skip(/errors: /)
+        more_errors = scanner.scan_until(/errors: /)
+        break unless more_errors
         errors_string = scanner.scan_until(/$/)
         errors << errors_string.split(', ')
       end
