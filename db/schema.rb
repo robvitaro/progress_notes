@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_181832) do
+ActiveRecord::Schema.define(version: 2020_09_07_185559) do
 
   create_table "patients", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 2020_09_07_181832) do
     t.index ["patient_id"], name: "index_progress_notes_on_patient_id"
   end
 
+  create_table "scores", force: :cascade do |t|
+    t.string "assessment", null: false
+    t.decimal "score", null: false
+    t.date "date", null: false
+    t.integer "patient_id", null: false
+    t.integer "progress_note_id", null: false
+    t.index ["patient_id"], name: "index_scores_on_patient_id"
+    t.index ["progress_note_id"], name: "index_scores_on_progress_note_id"
+  end
+
   create_table "word_errors", force: :cascade do |t|
     t.string "word", null: false
     t.date "date", null: false
@@ -36,6 +46,8 @@ ActiveRecord::Schema.define(version: 2020_09_07_181832) do
   end
 
   add_foreign_key "progress_notes", "patients"
+  add_foreign_key "scores", "patients"
+  add_foreign_key "scores", "progress_notes"
   add_foreign_key "word_errors", "patients"
   add_foreign_key "word_errors", "progress_notes"
 end
