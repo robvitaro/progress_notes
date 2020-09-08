@@ -69,6 +69,6 @@ class ProgressNotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def progress_note_params
-      params.require(:progress_note).permit(:notes, :patient_id)
+      params.require(:progress_note).permit(:notes, :session_date, :patient_id)
     end
 end

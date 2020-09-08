@@ -25,7 +25,7 @@ class NotesParserTest < ActiveSupport::TestCase
     parser = NotesParser.new(ProgressNote.new(notes: @notes))
     parser.call
     expected = [
-        type: "short",
+        length: "short",
         description: ": named vocabulary in pictures",
         number: 1
     ]

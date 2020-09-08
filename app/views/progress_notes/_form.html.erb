@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :session_date %>
+    <%= form.date_field :session_date %>
+  </div>
+
+  <div class="field">
     <%= form.label :notes %>
     <%= form.text_area :notes, cols: 100, rows: 20 %>
   </div>

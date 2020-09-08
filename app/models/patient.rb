@@ -1,6 +1,6 @@
 class Patient < ApplicationRecord
-  has_many :progress_notes
-  has_many :scores
-  has_many :goals
-  has_many :word_errors
+  has_many :progress_notes, dependent: :destroy
+  has_many :scores, dependent: :destroy
+  has_many :goals, dependent: :destroy
+  has_many :word_errors, dependent: :destroy
 end

@@ -1,8 +1,8 @@
 class ProgressNote < ApplicationRecord
   belongs_to :patient
-  has_many :scores
-  has_many :goals
-  has_many :word_errors
+  has_many :scores, dependent: :destroy
+  has_many :goals, dependent: :destroy
+  has_many :word_errors, dependent: :destroy
 
   after_save :create_scores_goals_and_word_errors
 
@@ -17,15 +17,15 @@ class ProgressNote < ApplicationRecord
     parser.call
 
     parser.scores.each do |assessment, score|
-      self.scores.create!(date: self.created_at, assessment: assessment, score: score, patient: self.patient)
+      self.scores.create!(date: self.session_date, assessment: assessment, score: score, patient: self.patient)
     end
 
     parser.goals.each do |goal|
-      self.goals.create!(date: self.created_at, description: goal[:description], length: goal[:length], number: goal[:number], patient: self.patient)
+      self.goals.create!(date: self.session_date, description: goal[:description], length: goal[:length], number: goal[:number], patient: self.patient)
     end
 
     parser.errors.each do |error|
-      self.word_errors.create!(date: self.created_at, word: error, patient: self.patient)
+      self.word_errors.create!(date: self.session_date, word: error, patient: self.patient)
     end
   end
 end

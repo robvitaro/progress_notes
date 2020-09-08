@@ -17,7 +17,7 @@ class ProgressNotesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create progress_note" do
     assert_difference('ProgressNote.count') do
-      post progress_notes_url, params: { progress_note: { notes: @progress_note.notes, patient_id: @progress_note.patient_id } }
+      post progress_notes_url, params: { progress_note: { notes: @progress_note.notes, session_date: '2020-09-08', patient_id: @progress_note.patient_id } }
     end
 
     assert_redirected_to progress_note_url(ProgressNote.last)

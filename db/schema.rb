@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_202106) do
+ActiveRecord::Schema.define(version: 2020_09_08_130119) do
 
   create_table "goals", force: :cascade do |t|
     t.string "length", null: false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_202106) do
     t.integer "patient_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "session_date", null: false
     t.index ["patient_id"], name: "index_progress_notes_on_patient_id"
   end
 
