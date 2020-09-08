@@ -4,7 +4,7 @@ class ProgressNotesController < ApplicationController
   # GET /progress_notes
   # GET /progress_notes.json
   def index
-    @progress_notes = ProgressNote.all
+    @progress_notes = ProgressNote.includes(:patient).all
   end
 
   # GET /progress_notes/1

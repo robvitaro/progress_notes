@@ -2,7 +2,7 @@
 
 <h1>Progress Notes</h1>
 
-<table>
+<table class="table table-responsive-lg">
   <thead>
     <tr>
       <th>Notes</th>
@@ -15,7 +15,7 @@
     <% @progress_notes.each do |progress_note| %>
       <tr>
         <td><%= progress_note.notes %></td>
-        <td><%= progress_note.patient_id %></td>
+        <td><%= progress_note.patient.name %></td>
         <td><%= link_to 'Show', progress_note %></td>
         <td><%= link_to 'Edit', edit_progress_note_path(progress_note) %></td>
         <td><%= link_to 'Destroy', progress_note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Progress Note', new_progress_note_path %>
+<%= link_to 'New Progress Note', new_progress_note_path, class: 'btn btn-primary' %>
