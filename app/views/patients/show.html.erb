@@ -1,9 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @patient.name %>
-</p>
+<h1><%= @patient.name %></h1>
+
+<h2>Errors</h2>
+<%= pie_chart WordError.where(patient: @patient).group(:word).count %>
+
+<h2>Scores</h2>
+<%= line_chart Score.select(:date, :score, :assessment).where(patient: @patient).group_by(&:assessment).map{|a,data|
+  {name: a, data: data.map {|d| [d.date, d.score] }}
+  } %>
 
 <%= link_to 'Edit', edit_patient_path(@patient) %> |
 <%= link_to 'Back', patients_path %>

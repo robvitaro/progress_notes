@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Progress Notes for <%= @progress_note.patient.name %>, <%= @progress_note.created_at %></h1>
+<h1>Progress Notes for <%= link_to(@progress_note.patient.name, patient_path(@progress_note.patient))%>, <%= @progress_note.created_at %></h1>
 
 <div>
   <p><strong>Notes:</strong></p>
